@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>XVault</title>
+       <meta charset="utf-8">
+       <link rel="stylesheet" type="text/css" href="">
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    </head>
+    <body>
+        Howdy
+        <form action="/upload" method="POST">
+            <ul>
+                <li>
+                    <label for="photo-submit"></label><input type="file" name="submitItem" id="photo-submit">    
+                </li>
+                <li>
+                    <input type="submit" value="Submit" class="submit btn" accept="img/*">
+                </li>
+            </ul>
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("form").on("submit", function(e) {
+                   e.preventDefault();
+                   var files = document.querySelector("input[type=file]").files;
+                   for(var i = 0; i < files.length; i++) {
+                       sendImage(files[i]);
+                   }
+                   window.location.href = window.location.href;
+                });
+            }); 
+            
+            function sendImage(file) {
+                var req = createXHRRequest("POST", "/upload");
+                req.send(file);
+            }
+            
+            function createXHRRequest(method, url, cb, options) {
+                var req = new XMLHttpRequest();
+            
+                req.open(method.toUpperCase(), url);
+                if(options && options.header) {
+                    req.setRequestHeader(options.header.name, options.header.value)
+                }
+                req.onreadystatechange = cb;
+                return req;
+            };            
+        </script>
+    </body>
+</html>
