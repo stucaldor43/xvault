@@ -29,4 +29,3 @@ class RegionTablePreparer
     end
 end
 
-RegionTablePreparer.new.prepare_region_table
