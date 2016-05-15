@@ -16,7 +16,8 @@ class TableDropper
        drop_region_table
        drop_picture_table
        drop_post_details_table
-       
+       drop_character_pool_table
+       close_connection
    end
    
    def drop_comment_table
@@ -34,6 +35,14 @@ class TableDropper
    def drop_region_table
        conn.exec("DROP TABLE region CASCADE;")
    end
+   
+   def drop_character_pool_table
+       conn.exec("DROP TABLE character_pool;") 
+   end
+   
+   def close_connection
+        conn.close    
+    end
 end
 
 TableDropper.new.drop
