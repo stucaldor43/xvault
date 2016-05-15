@@ -70,5 +70,4 @@ class SchemaApplier
     end
 end
 
-applier = SchemaApplier.new
-applier.build_schema
+
