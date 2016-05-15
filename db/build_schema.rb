@@ -31,21 +31,28 @@ class SchemaApplier
     def create_picture_table 
         conn.exec("CREATE TABLE picture (
         picture_id serial primary key,
-        original_image_s3_key varchar(64) not null,
-        thumbnail_image_s3_key varchar(64) not null
+        original_image_url varchar(128) not null,
+        thumbnail_image_url varchar(128) not null
         );") 
     end
     
     def create_region_table
-       conn.exec("CREATE TABLE region (
+        conn.exec("CREATE TABLE region (
         region_id serial primary key,
         name varchar(64) not null
         );") 
     end
     
-    def create_s3_image_key_index 
-       conn.exec("CREATE INDEX original_image_s3_key_index ON 
-       picture(original_image_s3_key);") 
+    def create_s3_image_url_index 
+        conn.exec("CREATE INDEX original_image_url ON 
+        picture(original_image_url);") 
+    end
+    
+    def create_character_pool_table
+        conn.exec("CREATE TABLE character_pool (
+        s3_url varchar(128) primary key not null,
+        pool_name varchar(64) not null unique
+        );") 
     end
     
     def close_connection
@@ -57,7 +64,8 @@ class SchemaApplier
         create_region_table
         create_post_details_table
         create_comment_table
-        create_s3_image_key_index 
+        create_s3_image_url_index
+        create_character_pool_table
         close_connection
     end
 end
