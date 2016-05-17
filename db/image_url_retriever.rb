@@ -45,7 +45,7 @@ class ImageUrlRetriever
    def test_fetch
       start = 1
       res = get_response "#{url_sans_parameters}q=#{search_terms.first}&cx=#{ENV["SEARCH_ENGINE_CX"]}&key=#{ENV["GOOGLE_BROWSER_API_KEY"]}&googlehost=#{googlehost}&imgType=#{img_type}&imgSize=#{img_size}&searchType=#{search_type}&start=#{start}" 
-      response_hash = JSON.parse("#{res}")
+      response_hash = JSON.parse("#{res.body}")
       image_info_list = []
       response_hash["items"].each do |search_item|
         if search_item["image"]["width"] && search_item["image"]["width"] >= 600
