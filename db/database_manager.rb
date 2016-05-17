@@ -46,12 +46,29 @@ class DatabaseManager
    
    def insert_post_details(picture_rows_primary_key)
       post_detail_insert_result = conn.exec("INSERT INTO post_details" +
-      "(post_date, fk_post_details_region, fk_post_details_picture)" +
+      "(post_date, fk_post_details_region, fk_post_details_picture) " +
       "VALUES(\'#{"#{Time.new.year}-#{Time.new.month}-#{Time.new.day}"}\', #{region_ids.sample}, #{picture_rows_primary_key})")
       
       if PG::Error === post_detail_insert_result
          raise Exception.new "Unable to insert post details for picture with id # of #{picture_rows_primary_key}"
       end
+   end
+   
+   def insert_comment(message, picture_primary_key)
+      conn.exec("INSERT INTO comment(message, date_created, fk_comment_picture)" +
+      " VALUES(\'#{conn.escape_string(message)}\'," + 
+      " \'#{"#{Time.new.year}-#{Time.new.month}-#{Time.new.day}"}\'," +
+      " #{picture_primary_key})")
+      
+   end
+   
+   def insert_character_pool_entry(url, filename)
+      conn.exec("INSERT INTO character_pool(s3_url, pool_name)" +
+      " VALUES(\'#{url}\', \'#{filename}\')")
+   end
+   
+   def execute_statement(sql)
+      conn.exec(sql)
    end
    
    def close_connection
