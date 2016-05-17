@@ -21,7 +21,7 @@ class TableDropper
    end
    
    def drop_comment_table
-       conn.exec("DROP TABLE comment;")
+       conn.exec("DROP TABLE comment CASCADE;")
    end
    
    def drop_picture_table
