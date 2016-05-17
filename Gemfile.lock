@@ -2,12 +2,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.4.0)
-    aws-sdk (2.3.0)
-      aws-sdk-resources (= 2.3.0)
-    aws-sdk-core (2.3.0)
+    aws-sdk (2.3.4)
+      aws-sdk-resources (= 2.3.4)
+    aws-sdk-core (2.3.4)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.3.0)
-      aws-sdk-core (= 2.3.0)
+    aws-sdk-resources (2.3.4)
+      aws-sdk-core (= 2.3.4)
     daemons (1.2.3)
     dragonfly (1.0.12)
       addressable (~> 2.3)
@@ -17,7 +17,8 @@ GEM
     jmespath (1.2.4)
       json_pure (>= 1.8.1)
     json_pure (1.8.3)
-    multi_json (1.11.3)
+    lorem (0.1.2)
+    multi_json (1.12.0)
     pg (0.18.4)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -30,7 +31,7 @@ GEM
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (~> 1.0)
-    tilt (2.0.2)
+    tilt (2.0.4)
 
 PLATFORMS
   ruby
@@ -38,6 +39,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (~> 2.2, >= 2.2.35)
   dragonfly (~> 1.0, >= 1.0.12)
+  lorem (~> 0.1.2)
   pg (~> 0.18.4)
   sinatra (~> 1.4.7)
   thin (~> 1.6, >= 1.6.4)
