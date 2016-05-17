@@ -21,7 +21,7 @@ class S3BucketManager
     @aws_container = containers.find {|pail| pail.name == ENV["S3_BUCKET_NAME"]}
    end
    
-   def insert_image(dragonfly_content)
+   def insert_file(dragonfly_content)
     begin
      time_hash = Time.new.hash
      s3_obj = aws_container.put_object(
