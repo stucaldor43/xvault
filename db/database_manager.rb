@@ -35,12 +35,13 @@ class DatabaseManager
             recently_inserted_row_primary_key = last_picture_row[0]["picture_id"]
             insert_post_details(recently_inserted_row_primary_key)
          else
-            raise Exception.new("Unable to insert #{original_image_url} and #{thumbnail_image_url} into picture table")
+            raise StandardError, "Unable to insert #{original_image_url}" +
+            " and #{thumbnail_image_url} into picture table"
          end
          
       else
-         raise Exception.new("Argument for insert_images method must contain" +
-         " original and thumb keys")
+         raise StandardError, "Argument for insert_images method must contain" +
+         " original and thumb keys"
       end
    end
    
@@ -49,13 +50,10 @@ class DatabaseManager
       "(post_date, fk_post_details_region, fk_post_details_picture) " +
       "VALUES(\'#{"#{Time.new.year}-#{Time.new.month}-#{Time.new.day}"}\', #{region_ids.sample}, #{picture_rows_primary_key})")
       
-      if PG::Error === post_detail_insert_result
-         raise Exception.new "Unable to insert post details for picture with id # of #{picture_rows_primary_key}"
-      end
    end
    
    def insert_comment(message, picture_primary_key)
-      conn.exec("INSERT INTO comment(message, date_created, fk_comment_picture)" +
+      comment_insert_result = conn.exec("INSERT INTO comment(message, date_created, fk_comment_picture)" +
       " VALUES(\'#{conn.escape_string(message)}\'," + 
       " \'#{"#{Time.new.year}-#{Time.new.month}-#{Time.new.day}"}\'," +
       " #{picture_primary_key})")
@@ -63,8 +61,9 @@ class DatabaseManager
    end
    
    def insert_character_pool_entry(url, filename)
-      conn.exec("INSERT INTO character_pool(s3_url, pool_name)" +
-      " VALUES(\'#{url}\', \'#{filename}\')")
+      character_pool_insert_result = conn.exec("INSERT INTO character_pool" +
+      "(s3_url, pool_name) VALUES(\'#{url}\', \'#{filename}\')")
+      
    end
    
    def execute_statement(sql)

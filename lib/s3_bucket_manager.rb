@@ -22,9 +22,8 @@ class S3BucketManager
    end
    
    def insert_file(dragonfly_content)
-    begin
-     time_hash = Time.new.hash
-     s3_obj = aws_container.put_object(
+    time_hash = Time.new.hash
+    s3_obj = aws_container.put_object(
       acl: "public-read",
       body: dragonfly_content.file,
       content_length: dragonfly_content.size,
@@ -33,10 +32,8 @@ class S3BucketManager
       end,
       content_type: dragonfly_content.mime_type,
       key: dragonfly_content.basename + time_hash.to_s.slice(1..time_hash.to_s.length - 1)
-     )
-     s3_obj.public_url
-    rescue => e
-     nil
-    end
+    )
+    s3_obj.public_url
+    
    end
 end
