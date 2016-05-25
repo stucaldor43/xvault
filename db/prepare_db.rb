@@ -16,7 +16,7 @@ applier.build_schema
 RegionTablePreparer.new.prepare_region_table
 
 # insert initial records for database
-google_result_image_info_list = ImageUrlRetriever.new.get_google_image_info_list
+google_result_image_info_list = ImageUrlRetriever.new.test_fetch
 
 dragonfly_content_hash_collection = []
 valid_extensions = ["png", "gif", "jpg", "jpeg", "bmp"]
@@ -32,16 +32,24 @@ end
 s3_manager = S3BucketManager.new
 s3_image_hash_list = [] 
 dragonfly_content_hash_collection.each do |hash|
-    s3_original_image_url = s3_manager.insert_file(hash[:larger_image])
-    s3_thumb_image_url = (s3_original_image_url) ?  s3_manager.insert_file(hash[:smaller_image]) : nil
-    if (s3_original_image_url && s3_thumb_image_url)
-        s3_image_hash_list << {original: s3_original_image_url, thumb: s3_thumb_image_url}
+    begin
+        s3_original_image_url = s3_manager.insert_file(hash[:larger_image])
+        s3_thumb_image_url = (s3_original_image_url) ?  s3_manager.insert_file(hash[:smaller_image]) : nil
+        if (s3_original_image_url && s3_thumb_image_url)
+            s3_image_hash_list << {original: s3_original_image_url, thumb: s3_thumb_image_url}
+        end
+    rescue Aws::S3::Errors::ServiceError => e
+        puts e
     end
 end
 
 pg_manager = DatabaseManager.new
 s3_image_hash_list.each do |img_pair|
-    pg_manager.insert_images(img_pair)
+    begin
+        pg_manager.insert_images(img_pair)
+    rescue => e
+        puts e
+    end
 end
 
 picture_primary_keys_list = pg_manager.execute_statement(
