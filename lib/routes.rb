@@ -81,6 +81,38 @@ helpers do
         end
         
     end
+    
+    def legal_page_number?(n)
+        manager = DatabaseManager.new
+        if manager.get_post_details.cmd_tuples <= 20
+            max_pages = 1
+        else 
+            if manager.get_post_details.cmd_tuples % 20 == 0
+                max_pages = manager.get_post_details.cmd_tuples / 20  
+            else 
+                max_pages = (manager.get_post_details.cmd_tuples / 20.to_f).ceil    
+            end
+        end
+        n <= max_pages    
+    end
+    
+    def get_comment_list(picture_id)
+        list = []
+        query_result = DatabaseManager.new.get_pictures_comments(picture_id)
+        query_result.each do |t|
+           list << {}.merge(t)
+        end
+        list
+    end
+    
+   def get_record_comment_merged_list(records)
+       list = []
+       records.each do |t|
+          comment_list = get_comment_list(t["picture_id"])
+          list << {}.merge(t).merge({"comments" => comment_list})
+       end
+       list
+   end
 end
 
 get "/" do
@@ -88,9 +120,6 @@ get "/" do
 end
 
 post "/upload" do 
-   # verify user upload meets requirements
-   # submit upload to s3
-   # add appropriate entries to database
    begin
      original_img = Dragonfly.app.fetch_file(env["rack.input"].path)
      url = upload_file_to_site(original_img)
@@ -107,4 +136,14 @@ post "/upload" do
    end
 end
 
+get "/gallery/:page" do 
+    if legal_page_number?(params["page"].to_i)
+        @records = DatabaseManager.new
+          .get_gallery_pertinent_records(params["page"].to_i)
+        @records = get_record_comment_merged_list(@records)
+        erb :gallery
+    else
+        pass   
+    end
+end
 

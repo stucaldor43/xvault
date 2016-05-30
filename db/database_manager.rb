@@ -66,6 +66,30 @@ class DatabaseManager
       
    end
    
+   def get_gallery_pertinent_records(page)
+      offset = (page.to_i - 1) * 20
+      if offset > 0
+         result = conn.exec("SELECT * FROM (SELECT * FROM post_details" + 
+         " INNER JOIN picture ON fk_post_details_picture=picture_id) as" +
+         " T LEFT OUTER JOIN region ON fk_post_details_region=region_id" +
+         " ORDER BY picture_id LIMIT 20 OFFSET #{offset}")
+      else
+         result = conn.exec("SELECT * FROM (SELECT * FROM post_details" + 
+         " INNER JOIN picture ON fk_post_details_picture=picture_id) as" +
+         " T LEFT OUTER JOIN region ON fk_post_details_region=region_id" +
+         " ORDER BY picture_id LIMIT 20")   
+      end
+   end
+   
+   def get_post_details
+      result = conn.exec("SELECT * FROM post_details")
+   end
+   
+   def get_pictures_comments(picture_id)
+      conn.exec("SELECT message, date_created FROM comment" +
+      " WHERE fk_comment_picture=#{picture_id.to_i}")
+   end
+   
    def execute_statement(sql)
       conn.exec(sql)
    end
