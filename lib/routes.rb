@@ -35,7 +35,7 @@ helpers do
             thumb
         end
         
-        raise Exception.new("Failed to create thumbnail") if thumb.nil?
+        raise StandardError, "Failed to create thumbnail" if thumb.nil?
         thumb
     end
     
@@ -62,7 +62,7 @@ helpers do
     end
     
     def add_picture_to_database(img_urls)
-        DatabaseManager.new.insert_images(img_urls)
+        database.insert_images(img_urls)
     end
     
     def upload_file_to_site(dragonfly_content)
@@ -83,7 +83,7 @@ helpers do
     end
     
     def legal_page_number?(n)
-        manager = DatabaseManager.new
+        manager = database
         if manager.get_post_details.cmd_tuples <= 20
             max_pages = 1
         else 
@@ -98,7 +98,7 @@ helpers do
     
     def get_comment_list(picture_id)
         list = []
-        query_result = DatabaseManager.new.get_pictures_comments(picture_id)
+        query_result = database.get_pictures_comments(picture_id)
         query_result.each do |t|
            list << {}.merge(t)
         end
@@ -112,6 +112,10 @@ helpers do
           list << {}.merge(t).merge({"comments" => comment_list})
        end
        list
+   end
+   
+   def database
+      db ||= DatabaseManager.new 
    end
 end
 
@@ -138,7 +142,7 @@ end
 
 get "/gallery/:page" do 
     if legal_page_number?(params["page"].to_i)
-        @records = DatabaseManager.new
+        @records = database
           .get_gallery_pertinent_records(params["page"].to_i)
         @records = get_record_comment_merged_list(@records)
         erb :gallery
