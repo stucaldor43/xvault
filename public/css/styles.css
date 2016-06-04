@@ -1,0 +1,7 @@
+.thumb {
+    height: 110px;
+}
+
+.uk-grid > * {
+    padding-left: 0;
+}
