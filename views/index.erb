@@ -5,6 +5,7 @@
        <meta charset="utf-8">
        <link rel="stylesheet" type="text/css" href="">
        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+       <script type="text/javascript" src="../js/request_helpers.js"></script>
     </head>
     <body>
         Howdy
@@ -35,16 +36,7 @@
                 req.send(file);
             }
             
-            function createXHRRequest(method, url, cb, options) {
-                var req = new XMLHttpRequest();
-            
-                req.open(method.toUpperCase(), url);
-                if(options && options.header) {
-                    req.setRequestHeader(options.header.name, options.header.value)
-                }
-                req.onreadystatechange = cb;
-                return req;
-            };            
+                       
         </script>
     </body>
 </html>

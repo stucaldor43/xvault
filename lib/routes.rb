@@ -2,6 +2,8 @@ require_relative "dragonfly_config"
 require "sinatra"
 require "dragonfly"
 require "json"
+require "uri"
+require "net/http"
 require_relative "s3_bucket_manager"
 require_relative "../db/database_manager"
 
@@ -117,6 +119,15 @@ helpers do
    def database
       db ||= DatabaseManager.new 
    end
+   
+   def get_response(url)
+      uri = URI(url)
+      Net::HTTP.get_response(uri)
+   end
+   
+   def get_achievement_page_body 
+      get_response("https://steamcommunity.com/stats/268500/achievements").body
+   end
 end
 
 get "/" do
@@ -149,5 +160,13 @@ get "/gallery/:page" do
     else
         pass   
     end
+end
+
+get "/achievements" do 
+    erb :achievements
+end
+
+get "/getxcomachievementsrawhtml" do 
+   get_achievement_page_body 
 end
 

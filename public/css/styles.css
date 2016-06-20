@@ -1,7 +1,34 @@
+* {
+    box-sizing: border-box;    
+}
+
 .thumb {
     height: 110px;
 }
 
 .uk-grid > * {
     padding-left: 0;
+}
+
+.chart {
+    position: relative; 
+}
+
+.tooltip {
+    color: #BFCFFF;
+    border: thick solid #BFCFFF;
+    padding:  1em;
+    text-align: center;
+    overflow: auto;    
+    display: inline-block;
+}
+
+svg {
+    width: 100%;
+    height: 100vh;
+    display: inline-block;
+}
+
+text {
+   font-size: 1em; 
 }
