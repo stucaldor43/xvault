@@ -11,3 +11,7 @@ gem 'dragonfly', '~> 1.0', '>= 1.0.12'
 gem 'aws-sdk', '~> 2.2', '>= 2.2.35'
 
 gem 'lorem', '~> 0.1.2'
+
+gem 'faker', '~> 1.6', '>= 1.6.3'
+
+gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
