@@ -71,13 +71,6 @@ class SchemaApplier
         conn.exec("CREATE TYPE user_role AS ENUM (\'member\', \'admin\');") 
     end
     
-    def create_character_pool_table
-        conn.exec("CREATE TABLE character_pool (
-        s3_url varchar(128) primary key not null,
-        pool_name varchar(64) not null unique
-        );") 
-    end
-    
     def close_connection
        conn.close 
     end
@@ -90,7 +83,6 @@ class SchemaApplier
         create_post_details_table
         create_comment_table
         create_s3_image_url_index
-        create_character_pool_table
         close_connection
     end
 end

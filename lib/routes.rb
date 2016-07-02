@@ -47,12 +47,6 @@ helpers do
             valid_image_extensions.index(dragonfly_content.image_properties["format"]))        
     end
     
-    def meets_character_pool_requirements?(dragonfly_content)
-        (valid_nonimage_extensions.index(dragonfly_content.image_properties["format"]) && 
-          dragonfly_content.size <= upload_size_limit)
-            
-    end
-    
     def upload_file_to_s3(dragonfly_content)
         if meets_image_requirements?(dragonfly_content)
             url = S3BucketManager.new.insert_file(dragonfly_content)

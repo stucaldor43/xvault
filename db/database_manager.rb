@@ -73,12 +73,6 @@ class DatabaseManager
       
    end
    
-   def insert_character_pool_entry(url, filename)
-      character_pool_insert_result = conn.exec("INSERT INTO character_pool" +
-      "(s3_url, pool_name) VALUES(\'#{url}\', \'#{filename}\')")
-      
-   end
-   
    def get_gallery_pertinent_records(page)
       offset = (page.to_i - 1) * 20
       if offset > 0

@@ -17,7 +17,6 @@ class TableDropper
        drop_picture_table
        drop_post_details_table
        drop_end_user_table
-       drop_character_pool_table
        close_connection
    end
    
@@ -39,10 +38,6 @@ class TableDropper
    
    def drop_end_user_table
       conn.exec("DROP TABLE end_user CASCADE;") 
-   end
-   
-   def drop_character_pool_table
-       conn.exec("DROP TABLE character_pool;") 
    end
    
    def close_connection
