@@ -60,6 +60,7 @@ class DatabaseManager
          "VALUES(\'#{Time.now}\', " +
          "NULL, #{picture_rows_primary_key}, #{user_primary_key}, 0, 0, false);")
       end
+
       
    end
    
@@ -70,7 +71,6 @@ class DatabaseManager
       " VALUES(\'#{conn.escape_string(message)}\'," + 
       " \'#{Time.now}\', #{picture_primary_key}, #{user_primary_key} " + 
       "0, 0, false)")
-      
    end
    
    def get_gallery_pertinent_records(page)
