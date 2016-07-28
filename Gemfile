@@ -16,3 +16,4 @@ gem 'faker', '~> 1.6', '>= 1.6.3'
 
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 
+gem 'rubocop', '~> 0.41.2', require: false

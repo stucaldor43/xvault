@@ -1,0 +1,8 @@
+Style/BlockDelimiters:
+    EnforcedStyle: braces_for_chaining
+    
+Style/WordArray:
+    EnforcedStyle: brackets
+    
+Style/IndentationWidth:
+    Width: 4
