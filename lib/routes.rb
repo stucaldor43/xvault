@@ -163,6 +163,8 @@ get '/gallery/:page' do
 end
 
 get '/achievements' do
+    @header_partial = erb :header
+    @footer_partial = erb :footer
     erb :achievements
 end
 
