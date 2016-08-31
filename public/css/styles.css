@@ -2,6 +2,11 @@
     box-sizing: border-box;    
 }
 
+html {
+    background-color: #313638;
+    font-size: 16px;
+}
+
 .thumb {
     height: 110px;
 }
@@ -11,16 +16,22 @@
 }
 
 .chart {
-    position: relative; 
+    position: relative;
+    min-height: 717px;
 }
 
 .tooltip {
-    color: #BFCFFF;
-    border: thick solid #BFCFFF;
+    color: #55F4F8;
     padding:  1em;
     text-align: center;
     overflow: auto;    
     display: inline-block;
+    line-height: 1.6em;
+    height: 20em;
+}
+
+.achievement-name {
+    font-weight: 600;
 }
 
 svg {
@@ -31,4 +42,123 @@ svg {
 
 text {
    font-size: 1em; 
+}
+
+li {
+    list-style: none;
+}
+
+/* Header */
+.mobile-menu-icon:before, .mobile-menu-icon:after {
+    width: 3em;
+    height: 12px;
+    background-color: #313638;
+    content: "";
+    display: block;
+    margin-bottom: .2em;
+}
+
+.mobile-menu-icon:after {
+    margin-bottom: 0;
+}
+
+nav .mobile-menu-icon span {
+    width: 3em;
+    height: 12px;
+    display: block;
+    background-color: #313638;
+    margin-bottom: .2em;
+}
+
+.mobile-menu-icon:hover {
+    opacity: 0.90;
+}
+
+.mobile-menu-icon {
+    display: block;
+    width: 2em;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-icon + .uk-navbar-nav {
+    display: none;
+}
+
+.mobile-menu-icon:hover + .uk-navbar-nav {
+    display: block;
+}
+
+.uk-navbar-nav:hover {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background-color: #F5F5F5;
+    padding: 1.6em;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.social-media-list {
+    margin: 0 auto;
+    text-align: center;
+}
+    
+.social-item {
+    display: inline-block;
+    padding: .5em;
+}
+
+@media (min-width: 480px) {
+    /* Header */
+    .uk-navbar {
+        text-align: right;    
+    }
+    
+    header .uk-navbar ul.uk-navbar-nav {
+        display: inline-block;
+        float: none;
+    }
+    
+    .nav-item {
+        transition: all 0.3s ease;
+    }
+    
+    .nav-item:hover {
+        background-color: #55F4F8;
+    }
+    
+    .uk-navbar-nav .nav-item a {
+        background-color: inherit !important;
+    }
+    
+    .mobile-menu-icon {
+        display: none;
+    }
+    
+    /* Footer */
+    .copyright, .social {
+        display: inline-block;
+        margin-left: -4px;
+        text-align: left;
+    }
+    
+    .copyright {
+        width: 60%;
+    }
+    
+    .social {
+        width: 40%;
+    }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 960px) {
+
 }

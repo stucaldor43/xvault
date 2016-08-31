@@ -112,8 +112,8 @@ window.addEventListener("load", function() {
           })
           .on("mouseover", function(d) {
             tooltip.node().innerHTML = "<img src=\"" + d.image +
-            "\">" + "<p>" + d.name + "</p>" + "<p>" + d.description
-            + "</p>" + "<p>" + d.percent + "</p>";
+            "\">" + "<p class=\"achievement-name\">" + d.name + "</p>" + "<p class=\"achievement-description\">" + d.description
+            + "</p>" + "<p class=\"achievement-percent\">" + d.percent + "</p>";
           });
         
         bubbles.append("text")
