@@ -3,22 +3,28 @@
     <head>
        <title>XVault</title>
        <meta charset="utf-8">
-       <link rel="stylesheet" type="text/css" href="">
-       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+       <link rel="stylesheet" type="text/css" href="../css/uikit.almost-flat.min.css">
+       <link rel="stylesheet" type="text/css" href="../css/styles.css">
+       <script type="text/javascript" src="../js/jquery-2.2.4.js"></script>
+       <script type="text/javascript" src="../js/uikit.min.js"></script>
        <script type="text/javascript" src="../js/request_helpers.js"></script>
     </head>
     <body>
-        Howdy
-        <form action="/upload" method="POST">
-            <ul>
-                <li>
-                    <label for="photo-submit"></label><input type="file" name="submitItem" id="photo-submit">    
-                </li>
-                <li>
-                    <input type="submit" value="Submit" class="submit btn" accept="img/*">
-                </li>
-            </ul>
-        </form>
+        <%= @header_partial %>
+        <section class="page-content">
+            Howdy
+            <form action="/upload" method="POST">
+                <ul>
+                    <li>
+                        <label for="photo-submit"></label><input type="file" name="submitItem" id="photo-submit">    
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit" class="submit btn" accept="img/*">
+                    </li>
+                </ul>
+            </form>
+        </section>
+        <%= @footer_partial %>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("form").on("submit", function(e) {

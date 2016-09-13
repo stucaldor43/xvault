@@ -131,6 +131,8 @@ helpers do
 end
 
 get '/' do
+    @header_partial = erb :header
+    @footer_partial = erb :footer
     erb :index
 end
 
@@ -153,6 +155,8 @@ end
 
 get '/gallery/:page' do
     if legal_page_number?(params['page'].to_i)
+        @header_partial = erb :header
+        @footer_partial = erb :footer
         @records = database
                    .get_gallery_pertinent_records(params['page'].to_i)
         @records = get_record_comment_merged_list(@records)

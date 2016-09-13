@@ -10,45 +10,37 @@
     <script type="text/javascript" src="../js/lightbox.min.js"></script>
   </head>
   <body>
-    <div class="uk-grid uk-container uk-container-center">
-    <header>
-    </header>    
-    <nav class="uk-navbar uk-width-1-1 uk-hidden-small">
-        <ul class="uk-navbar-nav">
-            <li class="nav-item"><a href="/">Home</a></li>
-            <li class="nav-item"><a href="/map">Map</a></li>
-        </ul>
-    </nav>
-    <section class="uk-width-1-1">
-        <p>Etiam rhoncus vulputate pulvinar. Sed nec vestibulum velit, vel vestibulum nibh.</p>    
-    </section>
-    <section class="uk-width-1-1">
-        <% @records.each do |r|%>
-            <div class="uk-display-inline-block"><a href=<%= "#x-#{r["picture_id"]}" %> data-uk-modal><img class="uk-thumbnail-small thumb" src=<%= "https://#{r["thumbnail_image_url"]}" %>></a></div>
-            <div id=<%= "x-#{r["picture_id"]}" %> class="uk-modal">
-                <div class="uk-modal-dialog uk-modal-dialog-lightbox uk-grid uk-modal-dialog-large">
-                    <a class="uk-modal-close uk-close uk-close-alt"></a>
-                    <div class="uk-width-small-1-1 uk-width-medium-2-3">
-                        <img src=<%= "https://#{r['original_image_url']}" %>>
+    <%= @header_partial %>
+    <section class="page-content">
+        <div class="uk-width-1-1">
+            <p>Etiam rhoncus vulputate pulvinar. Sed nec vestibulum velit, vel vestibulum nibh.</p>    
+        </div>
+        <div class="uk-width-1-1">
+            <% @records.each do |r|%>
+                <div class="uk-display-inline-block"><a href=<%= "#x-#{r["picture_id"]}" %> data-uk-modal><img class="uk-thumbnail-small thumb" src=<%= "https://#{r["thumbnail_image_url"]}" %>></a></div>
+                <div id=<%= "x-#{r["picture_id"]}" %> class="uk-modal">
+                    <div class="uk-modal-dialog uk-modal-dialog-lightbox uk-grid uk-modal-dialog-large">
+                        <a class="uk-modal-close uk-close uk-close-alt"></a>
+                        <div class="uk-width-small-1-1 uk-width-medium-2-3">
+                            <img src=<%= "https://#{r['original_image_url']}" %>>
+                        </div>
+                        <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-overflow-container">
+                            <% r["comments"].each do |comment| %>
+                                <article class="uk-comment">
+                                    <div class="uk-comment-body">
+                                        <%= comment["message"] %>
+                                    </div>
+                                </article>
+                            <% end %>
+                        </div>
                     </div>
-                    <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-overflow-container">
-                        <% r["comments"].each do |comment| %>
-                            <article class="uk-comment">
-                                <div class="uk-comment-body">
-                                    <%= comment["message"] %>
-                                </div>
-                            </article>
-                        <% end %>
-                    </div>
+                    
                 </div>
-                
-            </div>
-        <% end %>
+            <% end %>
+        </div>
     </section>
-    <footer class="uk-width-1-1">
-        <p>Etiam rhoncus vulputate pulvinar. Sed nec vestibulum velit, vel vestibulum nibh.</p>
-    </footer>
-    </div>
+    <%= @footer_partial %>
+    
    
    
   </body>
